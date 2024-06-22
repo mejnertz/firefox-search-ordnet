@@ -1,0 +1,69 @@
+name: Build
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Test build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update apt-get
+        run: sudo apt-get update -y
+
+      - name: Install firefox and npm
+        run: sudo apt-get install firefox
+
+      - name: Set up node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Build Extension
+        run: |
+          npm install
+          npm run build
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/*
+
+
+  release:
+    name: Release github
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: build
+          path: build
+
+      - name: GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
