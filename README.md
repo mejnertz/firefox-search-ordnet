@@ -18,3 +18,7 @@ npm run build
 ```
 npm run run
 ```
+
+## Todo
+
+- Right press and lookup word
