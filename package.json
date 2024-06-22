@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "web-ext build --overwrite-dest -a ./build -s ./src",
-    "run": "web-ext run"
+    "run": "web-ext run -s ./src"
   },
   "dependencies": {
     "web-ext": "^8.2.0"

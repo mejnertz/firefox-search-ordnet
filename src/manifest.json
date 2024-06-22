@@ -25,7 +25,7 @@
 
   "chrome_settings_overrides": {
     "search_provider": {
-      "name": "Ordnet.dk search",
+      "name": "Ordnet.dk",
       "search_url": "https://ordnet.dk/ddo/ordbog?query={searchTerms}",
       "keyword": "@ordnet"
     }
