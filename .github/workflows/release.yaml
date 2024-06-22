@@ -33,7 +33,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: build
+          name: build-artifact
           path: build/*
 
   release:
@@ -45,7 +45,7 @@ jobs:
     steps:
       - uses: actions/download-artifact@v3
         with:
-          name: Build
+          name: build-artifact
           path: build
       - uses: ncipollo/release-action@v1
         with:

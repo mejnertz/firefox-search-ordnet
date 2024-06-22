@@ -19,6 +19,11 @@ npm run build
 npm run run
 ```
 
+## Release
+
+Automatic for tags with semantic x.y.z names, see .github/workflows/release.yaml
+
+
 ## Todo
 
 - Right press and lookup word
